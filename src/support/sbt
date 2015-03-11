@@ -13,6 +13,9 @@ while [ -h "$loc" ]; do
     fi
 done
 base_dir=$(cd `dirname "$loc"` && pwd)
+if [ $(uname -o) == "Cygwin" ]; then
+    base_dir=$(cygpath -w $base_dir)
+fi
 
 java \
     -Xms512M -Xmx1024M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M \
